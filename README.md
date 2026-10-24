@@ -10,7 +10,7 @@ Este proyecto simula la arquitectura de base de datos relacional de una entidad 
 
 ---
 
-## Modelo de Datos y Estructura (`01_create_tables.sql`)
+## Modelo de Datos y Estructura (`01_schema_design.sql`)
 El sistema está compuesto por tres entidades principales con integridad referencial garantizada mediante claves primarias (`PRIMARY KEY`), claves foráneas (`FOREIGN KEY`) y restricciones por defecto (`DEFAULT`):
 
 ![Diagrama de Base de Datos](diagrama_bd.png)
