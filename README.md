@@ -35,7 +35,6 @@ Se desarrollaron consultas complejas enfocadas en resolver requerimientos analí
 ### 1. Vista Consolidada (`vw_ResumenClientes`)
 Centraliza el reporte gerencial unificando el conteo de cuentas y cálculo de saldos totales por cliente (manejando nulos mediante `ISNULL`), simplificando el consumo de datos para dashboards o reportes externos.
 
-```sql
 SELECT * FROM vw_ResumenClientes; 
 
 ---
