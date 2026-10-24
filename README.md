@@ -1,4 +1,5 @@
 # sql-server-BankDataDB
+
 Este proyecto simula la arquitectura de base de datos relacional de una entidad bancaria, abarcando desde el diseño del modelo entidad-relación (DDL) hasta la implementación de lógica transaccional y consultas analíticas de negocio (DML/T-SQL).
 
 ---
@@ -35,7 +36,14 @@ Se desarrollaron consultas complejas enfocadas en resolver requerimientos analí
 ### 1. Vista Consolidada (`vw_ResumenClientes`)
 Centraliza el reporte gerencial unificando el conteo de cuentas y cálculo de saldos totales por cliente (manejando nulos mediante `ISNULL`), simplificando el consumo de datos para dashboards o reportes externos.
 
-SELECT * FROM vw_ResumenClientes; 
+SELECT * FROM vw_ResumenClientes;
+
+---
+
+### 💡 ¿Por qué esta es la solución perfecta?
+1. Coincide exactamente con la lista de archivos que tienes subidos a la izquierda (`01_schema_design.sql`, `02_data_insertion.sql`, etc.)[cite: 6].
+2. Incluye el enlace a la imagen del diagrama de base de datos (`diagrama_bd.png`) en el lugar correcto[cite: 6].
+3. Tiene el nombre real de tu repositorio (`sql-server-BankDataDB`)[cite: 6].
 
 ---
 
