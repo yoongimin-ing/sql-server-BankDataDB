@@ -1,66 +1,33 @@
-USE EcommerceDB;
+USE BankDataDB;
 GO
 
--- 1. Insertar Categorías
-INSERT INTO Categorias (NombreCategoria) 
-VALUES 
-('Tecnología'),
-('Ropa y Calzado'),
-('Hogar y Muebles'),
-('Deportes');
+INSERT INTO Clientes (TipoDocumento, NumeroDocumento, Nombre, Apellido, FechaNacimiento, EstadoRiesgo)
+VALUES
+('DNI', '01569872', 'YOONGI', 'MIN', '1990-05-12', 'Normal'),
+('DNI', '65489636', 'JUNGKOOK', 'JEON', '1995-09-02', 'Alto'),
+('DNI', '78365942', 'JIMIN', 'PARK', '2006-08-03', 'Alto'),
+('DNI', '65984214', 'TAEHYUNG', 'KIM', '2000-01-08', 'Alto'),
+('DNI', '36549863', 'HOSEOK', 'JUNG', '1997-04-15', 'Normal'),
+('CE',  'E9835933', 'NAMJOON', 'KIM', '1994-09-06', 'Normal'),
+('CE',  'E9426543', 'SEOKJIN', 'KIM', '1997-12-12', 'Alto'),
+('DNI', '35987456', 'ABIGAIL', 'MIN', '2004-07-13', 'Normal'),
+('CE',  'E6622559', 'MARIANA', 'PARK', '2003-10-12', 'Normal'),
+('DNI', '26594325', 'ANDREW', 'YOUNG', '1999-07-13', 'Alto');
 
--- 2. Insertar Productos
-INSERT INTO Productos (NombreProducto, Precio, Stock, CategoriaID) 
-VALUES 
-('Laptop Gamer ASUS', 1200.00, 15, 1),
-('Smartphone Samsung Galaxy S23', 850.00, 25, 1),
-('Audífonos Inalámbricos Sony', 150.00, 50, 1),
-('Zapatillas Deportivas Nike', 110.00, 30, 2),
-('Chaqueta de Cuero', 180.00, 12, 2),
-('Silla Ergonómica de Oficina', 220.00, 20, 3),
-('Mesa de Centro de Madera', 140.00, 8, 3),
-('Mancuernas 10kg (Par)', 60.00, 40, 4),
-('Mat de Yoga Antideslizante', 25.00, 60, 4);
+INSERT INTO CuentasBancarias (NumeroCuenta, TipoCuenta, Saldo, Moneda, ClienteID)
+VALUES
+('191-11223344-0-01', 'Ahorros', 1500.00, 'PEN', 1),
+('191-55667788-0-02', 'Sueldo',  4200.50, 'PEN', 1),
+('191-99001122-0-03', 'Ahorros',  250.00, 'PEN', 2),
+('191-33445566-0-04', 'CTS',     8900.00, 'USD', 3),
+('191-44556677-0-05', 'Ahorros', 1200.00, 'PEN', 4),
+('191-77889900-0-06', 'Sueldo',  3500.00, 'PEN', 5),
+('191-22334455-0-07', 'Ahorros', 5000.00, 'USD', 6);
 
--- 3. Insertar Clientes
-INSERT INTO Clientes (Nombre, Apellido, Email) 
-VALUES 
-('Carlos', 'Mendoza', 'carlos.mendoza@email.com'),
-('Ana', 'García', 'ana.garcia@email.com'),
-('Luis', 'Torres', 'luis.torres@email.com'),
-('María', 'Rojas', 'maria.rojas@email.com'),
-('Jorge', 'Fernández', 'jorge.fernandez@email.com');
-
--- 4. Insertar Pedidos
-INSERT INTO Pedidos (ClienteID, FechaPedido, Total) 
-VALUES 
-(1, '2024-01-15 10:30:00', 1350.00),
-(2, '2024-01-18 14:15:00', 110.00),
-(3, '2024-02-01 09:00:00', 910.00),
-(1, '2024-02-10 16:45:00', 150.00),
-(4, '2024-02-12 11:20:00', 360.00),
-(5, '2024-02-15 18:00:00', 850.00);
-
--- 5. Insertar Detalle de los Pedidos
-INSERT INTO DetallePedidos (PedidoID, ProductoID, Cantidad, PrecioUnitario) 
-VALUES 
--- Pedido 1 (Carlos: Laptop + Audífonos)
-(1, 1, 1, 1200.00),
-(1, 3, 1, 150.00),
-
--- Pedido 2 (Ana: Zapatillas)
-(2, 4, 1, 110.00),
-
--- Pedido 3 (Luis: Smartphone + Mancuernas)
-(3, 2, 1, 850.00),
-(3, 8, 1, 60.00),
-
--- Pedido 4 (Carlos: Audífonos)
-(4, 3, 1, 150.00),
-
--- Pedido 5 (María: Silla + Mesa)
-(5, 6, 1, 220.00),
-(5, 7, 1, 140.00),
-
--- Pedido 6 (Jorge: Smartphone)
-(6, 2, 1, 850.00);
+INSERT INTO Transacciones (TipoTransaccion, Monto, CuentaID)
+VALUES
+('Deposito',      500.00, 1),
+('Retiro',        200.00, 1),
+('Transferencia', 1000.00, 2),
+('Deposito',     1500.00, 4),
+('Retiro',        100.00, 3);

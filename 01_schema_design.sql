@@ -1,51 +1,36 @@
-﻿--hola, mi nombre es Abi c:
--- Creación de la base de datos
-CREATE DATABASE EcommerceDB;
-GO
-USE EcommerceDB;
+CREATE DATABASE BankDataDB;
 GO
 
--- Tabla Clientes
+USE BankDataDB;
+GO
+
 CREATE TABLE Clientes (
-    ClienteID INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL,
-    Apellido VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) NOT NULL UNIQUE,
-    FechaRegistro DATE DEFAULT GETDATE()
+	ClienteID INT IDENTITY(1,1) PRIMARY KEY,
+	TipoDocumento VARCHAR(10) NOT NULL, 
+	NumeroDocumento VARCHAR(15) NOT NULL UNIQUE,
+	Nombre VARCHAR(50) NOT NULL,
+	Apellido VARCHAR(50) NOT NULL,
+	FechaNacimiento DATE NOT NULL,
+	EstadoRiesgo VARCHAR(20) DEFAULT 'Normal'
 );
 
--- Tabla Categorías
-CREATE TABLE Categorias (
-    CategoriaID INT IDENTITY(1,1) PRIMARY KEY,
-    NombreCategoria VARCHAR(50) NOT NULL
+CREATE TABLE CuentasBancarias (
+	CuentaID INT IDENTITY(1,1) PRIMARY KEY,
+	NumeroCuenta VARCHAR(20) NOT NULL UNIQUE,
+	TipoCuenta VARCHAR(20) NOT NULL,
+	Saldo DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+	Moneda VARCHAR(3) NOT NULL DEFAULT 'PEN',
+	FechaApertura DATE DEFAULT GETDATE(),
+	ClienteID INT NOT NULL, 
+	FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
 );
 
--- Tabla Productos
-CREATE TABLE Productos (
-    ProductoID INT IDENTITY(1,1) PRIMARY KEY,
-    NombreProducto VARCHAR(100) NOT NULL,
-    Precio DECIMAL(10,2) NOT NULL,
-    Stock INT NOT NULL DEFAULT 0,
-    CategoriaID INT,
-    FOREIGN KEY (CategoriaID) REFERENCES Categorias(CategoriaID)
+CREATE TABLE Transacciones (
+	TransaccionID INT IDENTITY(1,1) PRIMARY KEY,
+	TipoTransaccion VARCHAR(20) NOT NULL,
+	Monto DECIMAL(12,2) NOT NULL,
+	FechaTransaccion DATETIME DEFAULT GETDATE(),
+	CuentaID INT NOT NULL,
+	FOREIGN KEY (CuentaID) REFERENCES CuentasBancarias(CuentaID)
 );
 
--- Tabla Pedidos
-CREATE TABLE Pedidos (
-    PedidoID INT IDENTITY(1,1) PRIMARY KEY,
-    ClienteID INT NOT NULL,
-    FechaPedido DATETIME DEFAULT GETDATE(),
-    Total DECIMAL(10,2) DEFAULT 0.00,
-    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
-);
-
--- Tabla DetallePedidos
-CREATE TABLE DetallePedidos (
-    DetalleID INT IDENTITY(1,1) PRIMARY KEY,
-    PedidoID INT NOT NULL,
-    ProductoID INT NOT NULL,
-    Cantidad INT NOT NULL,
-    PrecioUnitario DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (PedidoID) REFERENCES Pedidos(PedidoID),
-    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID)
-);
